@@ -1,0 +1,34 @@
+# Criando arquivo Excel de vendas usando openpyxl
+
+from openpyxl import Workbook
+from datetime import datetime
+import random
+
+# Criar workbook e planilha
+wb = Workbook()
+ws = wb.active
+ws.title = "Vendas"
+
+# Cabeçalho
+headers = ["Data", "Produto", "Região", "Quantidade", "Valor"]
+ws.append(headers)
+
+# Dados simulados
+produtos = ["Notebook", "Mouse", "Teclado", "Monitor", "Headset"]
+regioes = ["Sudeste", "Sul", "Nordeste", "Centro-Oeste", "Norte"]
+
+for _ in range(50):
+    data = datetime(2025, random.randint(1, 6), random.randint(1, 28))
+    produto = random.choice(produtos)
+    regiao = random.choice(regioes)
+    quantidade = random.randint(1, 10)
+    valor_unitario = random.randint(50, 3000)
+    valor_total = quantidade * valor_unitario
+    
+    ws.append([data, produto, regiao, quantidade, valor_total])
+
+# Salvar arquivo
+file_path = "/mnt/data/vendas.xlsx"
+wb.save(file_path)
+
+file_path
